@@ -211,17 +211,20 @@ jQuery( function( $ ){
 			});
 		}
 	}).on( 'select', function( ){ 
-		var this_id = 0, 
+		var this_id = 0, this_url = '',
 			selection = custom_uploader.state().get( 'selection' );
 		selection.each( function( file ){
 			this_id = file.toJSON().id;
+			if ( file.attributes.sizes.medium ) this_url = file.attributes.sizes.medium.url;
+			else if ( file.attributes.sizes.large ) this_url = file.attributes.sizes.large.url;
+			else this_url = file.attributes.url;
 			if ( $.inArray( this_id, ex_ids ) > -1 ){ // Remove the ID duplicate in the list.
 				ex_ul.find( 'li#img_' + this_id ).remove();
 			}
 			ex_ul.append( '<li class="img" id="img_' + this_id + '"></li>' ).find( 'li:last' ).append(
 				'<span class="img_wrap">' + 
 				'<a href="#" class="mui_remove button" title="' + <?php echo '\''.__( 'Remove this image from the list', 'mui' ).'\''; ?> + '"></a>' +
-				'<img src="' + file.attributes.url + '" />' +
+				'<img src="' + this_url + '" />' +
 				'<input type="hidden" name="my_upload_images[]" value="'+ this_id +'" />' + 
 				'</span>'
 			);
