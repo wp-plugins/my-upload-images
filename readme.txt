@@ -20,7 +20,8 @@ Available only for WordPress 4.0+.
 
 
 == Screenshots ==
-1. Just upload and sort images.
+1. Select post types you’d like to display metabox.
+2. Just upload and sort images.
 
 
 

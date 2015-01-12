@@ -215,12 +215,6 @@ jQuery( function( $ ){
 			selection = custom_uploader.state().get( 'selection' );
 		selection.each( function( file ){
 			this_id = file.toJSON().id;
-			this_url = file.attributes.url;
-			if ( file.attributes.sizes.medium.url ) {
-				this_url = file.attributes.sizes.medium.url;
-			} else if ( file.attributes.sizes.large.url ) {
-				this_url = file.attributes.sizes.large.url;
-			}
 			if ( $.inArray( this_id, ex_ids ) > -1 ){ // Remove the ID duplicate in the list.
 				ex_ul.find( 'li#img_' + this_id ).remove();
 			}
