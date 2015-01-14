@@ -13,7 +13,7 @@ Create metabox with media uploader. It allows to upload and sort images in any p
 
 
 == Description ==
-This plugin create the metabox with the media uploader in any post types you want. In the metabox, You can drag images into any order you want. The IDs and the order of images will put on record in the customfield of your posts as array.
+This plugin create the metabox with the media uploader in any post types. In the metabox, You can drag images into any order you like. The IDs and the order of images will put on record in the customfield of your posts as array.
 = Attention =
 Available only for WordPress 4.0+. 
 
