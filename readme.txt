@@ -1,6 +1,6 @@
 === My upload images ===
-Contributors: Mizuho Ogino
-Tags: media uploader, upload, image, custom field
+Contributors: fishpie
+Tags: media uploader, upload, image, custom field, cms
 Plugin URI: http://web.contempo.jp/weblog/tips/p617
 Requires at least: 4.0
 Tested up to: 4.1
@@ -13,7 +13,7 @@ Create metabox with media uploader. It allows to upload and sort images in any p
 
 
 == Description ==
-This plugin create the metabox with the media uploader in any post types. In the metabox, You can drag images into any order you like. The IDs and the order of images will put on record in the customfield of your posts as array.
+This plugin create the metabox with the media uploader into any post types. In the metabox, You can drag images into any order you like. The IDs and the order of images will put on record in the customfield of your posts as array. 
 = Attention =
 Available only for WordPress 4.0+. 
 
@@ -48,13 +48,13 @@ The custom field doesn’t have multiple values, it just has become an array in 
 
 == Changelog ==
 = 1.3.1 =
-15.Jan.2015. Optimizing Javascript.
+15.Jan.2015. Fixed Javascript
 
 = 1.3 =
-10.Jan.2015. First public version Release.
+10.Jan.2015. First public version Release
 
 = 1.0 =
-Apr.2014. Initial Release.
+Apr.2014. Initial Release
 
 
 
