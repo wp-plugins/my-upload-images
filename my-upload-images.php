@@ -4,7 +4,7 @@
 plugin name: My upload images
 Plugin URI: http://web.contempo.jp/weblog/tips/p617
 Description: Create metabox with media uploader. It allows to upload and sort images in any post_type. 
-Author: Mizuho Ogino
+Author: fishpie
 Author URI: http://web.contempo.jp/
 Version: 1.3.1
 Text Domain: mui
