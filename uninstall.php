@@ -2,8 +2,7 @@
 
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) exit();
 
-$keepvalue = get_option('mui_keepvalues');
-if ( empty( $keepvalue ) || $keepvalue == 'delete' ) {
+if ( get_option('mui_keepvalues') == 'delete' ) {
 	delete_option( 'mui_posttype' );
 	delete_option( 'mui_pages' );
 	delete_option( 'mui_title' );

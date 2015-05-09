@@ -4,9 +4,9 @@
 plugin name: My upload images
 Plugin URI: http://web.contempo.jp/weblog/tips/p617
 Description: Create metabox with media uploader. It allows to upload and sort images in any post_type. 
-Author: fishpie
+Author: Mizuho Ogino
 Author URI: http://web.contempo.jp/
-Version: 1.3.1
+Version: 1.3.2
 Text Domain: mui
 Domain Path: /languages
 License: http://www.gnu.org/licenses/gpl.html GPL v2 or later
@@ -28,10 +28,11 @@ function mui_options() {
         update_option('mui_posttype', $_POST['mui_posttype']);
         update_option('mui_pages', $_POST['mui_pages']);
         update_option('mui_keepvalues', $_POST['mui_keepvalues']);
-        update_option('mui_title', strip_tags( $_POST['mui_title']) );
+        update_option('mui_postthumb', $_POST['mui_postthumb']);
+        update_option('mui_title', strip_tags( $_POST['mui_title']));
         echo '<div class="updated fade"><p><strong>'. __('Options saved.', 'mui'). '</strong></p></div>';
     } 
-	$default = $keepvalues = array();
+	$default = $keepvalues = $postthumb = array();
 	$opt = get_option('mui_posttype');
 	if ($opt): foreach( $opt as $key => $val ):
 		$default[$val] = true;
@@ -40,8 +41,12 @@ function mui_options() {
 	if ($opt): foreach( $opt as $key => $val ):
 		$default[$val] = true;
 	endforeach; endif;
-	$keepvalue = get_option('mui_keepvalues');
-	if ( $keepvalue ) $keepvalues[ $keepvalue ] = ' selected';
+	$opt = get_option('mui_keepvalues');
+	if ( empty( $opt ) ) $opt = 'keep';
+	$keepvalues[ $opt ] = ' selected';
+	$opt = get_option('mui_postthumb');
+	if ( empty( $opt ) ) $opt = 'generate';
+	$postthumb[ $opt ] = ' selected';
 	$post_types = get_post_types( array( 'public' => true ), 'objects' ); 
 	unset($post_types['attachment']); 
 	$inputs = $individuals = '';
@@ -77,6 +82,12 @@ function mui_options() {
 		"\t\t".'<td>'."\n". $inputs. "\t\t".'</td>'."\n".
 		"\t".'</tr>'."\n".
 		$individuals. 
+		"\t".'<tr>'."\n".
+		"\t\t".'<th scope="row">'.__( 'Featured images', 'mui' ).'</th>'."\n".
+		"\t\t".'<td>'."\n".
+		"\t\t\t". '<select name="mui_postthumb"><option value="generate"'.$postthumb[ 'generate' ].'>'.__( 'Generate thumbnail from the first of my upload images', 'mui' ).'</option><option value="defalt"'.$postthumb[ 'defalt' ].'>'.__( 'No automatically generating', 'mui' ).'</option></select>'."\n".
+		"\t\t".'</td>'."\n".
+		"\t".'</tr>'."\n".
 		"\t".'<tr>'."\n".
 		"\t\t".'<th scope="row">'.__( 'When the plugin is uninstalled', 'mui' ).'</th>'."\n".
 		"\t\t".'<td>'."\n".
@@ -244,6 +255,7 @@ jQuery( function( $ ){
 </script>
 <?php }
 
+
 function save_mui_images( $post_id ){
 	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
 	if ( !isset($_POST['mui_nonce']) || isset($_POST['mui_nonce']) && !wp_verify_nonce($_POST['mui_nonce'], basename(__FILE__))) return $post_id; 
@@ -261,4 +273,20 @@ function save_mui_images( $post_id ){
 			delete_post_meta( $post_id, 'my_upload_images', $ex_images ); 
 		}
 	}
+	if ( get_option('mui_postthumb') == 'generate' ) { // USING MY UPLOAD IMAGES AS POST THUMBNAIL
+		if ( $image = get_post_meta( $post_id, 'my_upload_images', true ) ){
+			update_post_meta( $post_id, '_thumbnail_id', $image[0] );
+		}
+	}
 }
+
+
+// add_filter( 'post_thumbnail_html', 'mui_thumbnail_html', 20, 5 );
+// function mui_thumbnail_html( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
+// // USING MY UPLOAD IMAGES AS POST THUMBNAIL
+// 	if ( $image = get_post_meta( $post_id, 'my_upload_images', true ) ){
+// 		$image = wp_get_attachment_image_src ( $image[0], $size );
+// 		$html = '<img src="'.$image[0].'" width="'.$image[1].'" height="'.$image[2].'"/>';
+// 	}
+// 	return $html;
+// }

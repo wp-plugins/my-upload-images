@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: My Upload Images Plugin\n"
-"POT-Creation-Date: 2015-01-09 16:10+0900\n"
-"PO-Revision-Date: 2015-01-12 09:43+0900\n"
+"POT-Creation-Date: 2015-05-10 01:47+0900\n"
+"PO-Revision-Date: 2015-05-10 01:48+0900\n"
 "Last-Translator: \n"
 "Language-Team: web.contempo.jp <design@contempo.jp>\n"
 "Language: ja_JP\n"
@@ -10,71 +10,97 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Poedit 1.7.6\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../my-upload-images.php:23 ../my-upload-images.php:97
+#: ../my-upload-images.php:23 ../my-upload-images.php:108
 msgid "My Upload Images"
 msgstr "マイアップロード画像"
 
-#: ../my-upload-images.php:32
+#: ../my-upload-images.php:33
 msgid "Options saved."
 msgstr "変更を保存しました。"
 
-#: ../my-upload-images.php:54
+#: ../my-upload-images.php:59
 #, php-format
 msgid "Select %s"
 msgstr "%sを選択"
 
-#: ../my-upload-images.php:66
+#: ../my-upload-images.php:71
 msgid "My Upload Images Settings"
 msgstr "マイアップロード画像の設定"
 
-#: ../my-upload-images.php:67
+#: ../my-upload-images.php:72
 msgid "Select post_types to display the metabox."
 msgstr "メタボックスを表示する投稿タイプを選んで下さい。"
 
-#: ../my-upload-images.php:68
-msgid "If the post_type has \"capability_type\" parameter as \"page\", pages will be individually selectable."
-msgstr "投稿タイプの「capability_type」が「page」に設定されている場合、ページを個別にセレクトできます。"
+#: ../my-upload-images.php:73
+msgid ""
+"If the post_type has \"capability_type\" parameter as \"page\", pages will "
+"be individually selectable."
+msgstr ""
+"投稿タイプの「capability_type」が「page」に設定されている場合、ページを個別"
+"にセレクトできます。"
 
-#: ../my-upload-images.php:72
+#: ../my-upload-images.php:77
 msgid "Metabox title"
 msgstr "メタボックスのタイトル"
 
-#: ../my-upload-images.php:76
+#: ../my-upload-images.php:81
 msgid "Select post types"
 msgstr "投稿タイプを選択"
 
-#: ../my-upload-images.php:81
+#: ../my-upload-images.php:86
+msgid "Featured images"
+msgstr "アイキャッチ画像"
+
+#: ../my-upload-images.php:88
+msgid "Generate thumbnail from the first of my upload images"
+msgstr "マイアップロード画像の先頭から自動でサムネイルを作成する"
+
+#: ../my-upload-images.php:88
+msgid "No automatically generating"
+msgstr "自動で作成しない"
+
+#: ../my-upload-images.php:92
 msgid "When the plugin is uninstalled"
 msgstr "アンインストール時の設定"
 
-#: ../my-upload-images.php:83
+#: ../my-upload-images.php:94
 msgid "Keep the options and customfields"
-msgstr "オプション設定とカスタムフィールドをキープします"
+msgstr "オプション設定とカスタムフィールドをキープする"
 
-#: ../my-upload-images.php:83
+#: ../my-upload-images.php:94
 msgid "Delete the options and customfields"
-msgstr "オプション設定とカスタムフィールドを削除します"
+msgstr "オプション設定とカスタムフィールドを削除する"
 
-#: ../my-upload-images.php:87
+#: ../my-upload-images.php:98
 msgid "Save changes"
 msgstr "変更を保存"
 
-#: ../my-upload-images.php:127 ../my-upload-images.php:221
+#: ../my-upload-images.php:138 ../my-upload-images.php:237
 msgid "Remove this image from the list"
 msgstr "この画像をリストから削除"
 
-#: ../my-upload-images.php:159
+#: ../my-upload-images.php:170
 msgid "Add and edit images"
 msgstr "画像の追加・編集"
 
-#: ../my-upload-images.php:176
+#: ../my-upload-images.php:187
 msgid "Upload images"
 msgstr "画像のアップロード"
 
-msgid "Create metabox with media uploader. It allows to upload and sort images in any post_type."
-msgstr "このプラグインは画像アップローダー付きカスタムフィールドを設置します。メタボックス内の画像はドラッグで並べ替えることができます。"
+#~ msgid "Post thumbnail"
+#~ msgstr "アイキャッチ画像"
+
+#~ msgid "Generating from the first of my upload images"
+#~ msgstr "マイアップロード画像の先頭から自動で作成"
+
+#~ msgid ""
+#~ "Create metabox with media uploader. It allows to upload and sort images "
+#~ "in any post_type."
+#~ msgstr ""
+#~ "このプラグインは画像アップローダー付きカスタムフィールドを設置します。メ"
+#~ "タボックス内の画像はドラッグで並べ替えることができます。"

@@ -1,10 +1,10 @@
 === My upload images ===
-Contributors: fishpie
+Contributors: Mizuho Ogino
 Tags: media uploader, upload, image, custom field, cms
 Plugin URI: http://web.contempo.jp/weblog/tips/p617
 Requires at least: 4.0
 Tested up to: 4.1
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,9 @@ The custom field doesn’t have multiple values, it just has become an array in 
 
 
 == Changelog ==
+= 1.3.2 =
+10.May.2015. Auto generate post thumbnail by plugin
+
 = 1.3.1 =
 15.Jan.2015. Fixed Javascript
 
