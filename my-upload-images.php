@@ -45,7 +45,7 @@ function mui_options() {
 	if ( empty( $opt ) ) $opt = 'keep';
 	$keepvalues[ $opt ] = ' selected';
 	$opt = get_option('mui_postthumb');
-	if ( empty( $opt ) ) $opt = 'generate';
+	if ( empty( $opt ) ) $opt = 'defalt';
 	$postthumb[ $opt ] = ' selected';
 	$post_types = get_post_types( array( 'public' => true ), 'objects' ); 
 	unset($post_types['attachment']); 
