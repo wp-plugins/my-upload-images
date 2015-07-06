@@ -45,7 +45,7 @@ function mui_options() {
 	if ( empty( $opt ) ) $opt = 'keep';
 	$keepvalues[ $opt ] = ' selected';
 	$opt = get_option('mui_postthumb');
-	if ( empty( $opt ) ) $opt = 'generate';
+	if ( empty( $opt ) ) $opt = 'defalt';
 	$postthumb[ $opt ] = ' selected';
 	$post_types = get_post_types( array( 'public' => true ), 'objects' ); 
 	unset($post_types['attachment']); 
@@ -280,13 +280,3 @@ function save_mui_images( $post_id ){
 	}
 }
 
-
-// add_filter( 'post_thumbnail_html', 'mui_thumbnail_html', 20, 5 );
-// function mui_thumbnail_html( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
-// // USING MY UPLOAD IMAGES AS POST THUMBNAIL
-// 	if ( $image = get_post_meta( $post_id, 'my_upload_images', true ) ){
-// 		$image = wp_get_attachment_image_src ( $image[0], $size );
-// 		$html = '<img src="'.$image[0].'" width="'.$image[1].'" height="'.$image[2].'"/>';
-// 	}
-// 	return $html;
-// }
