@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: My Upload Images Plugin\n"
-"POT-Creation-Date: 2015-05-10 01:47+0900\n"
-"PO-Revision-Date: 2015-05-10 01:48+0900\n"
+"POT-Creation-Date: 2015-06-29 15:11+0900\n"
+"PO-Revision-Date: 2015-06-29 15:14+0900\n"
 "Last-Translator: \n"
 "Language-Team: web.contempo.jp <design@contempo.jp>\n"
 "Language: ja_JP\n"
@@ -10,33 +10,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.8.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../my-upload-images.php:23 ../my-upload-images.php:108
+#: ../my-upload-images.php:23 ../my-upload-images.php:118
 msgid "My Upload Images"
 msgstr "マイアップロード画像"
 
-#: ../my-upload-images.php:33
+#: ../my-upload-images.php:34
 msgid "Options saved."
 msgstr "変更を保存しました。"
 
-#: ../my-upload-images.php:59
+#: ../my-upload-images.php:63
 #, php-format
 msgid "Select %s"
 msgstr "%sを選択"
 
-#: ../my-upload-images.php:71
+#: ../my-upload-images.php:75
 msgid "My Upload Images Settings"
 msgstr "マイアップロード画像の設定"
 
-#: ../my-upload-images.php:72
+#: ../my-upload-images.php:76
 msgid "Select post_types to display the metabox."
 msgstr "メタボックスを表示する投稿タイプを選んで下さい。"
 
-#: ../my-upload-images.php:73
+#: ../my-upload-images.php:80
+msgid "Metabox title"
+msgstr "メタボックスのタイトル"
+
+#: ../my-upload-images.php:84
+msgid "Select post types"
+msgstr "投稿タイプを選択"
+
+#: ../my-upload-images.php:85
 msgid ""
 "If the post_type has \"capability_type\" parameter as \"page\", pages will "
 "be individually selectable."
@@ -44,51 +52,66 @@ msgstr ""
 "投稿タイプの「capability_type」が「page」に設定されている場合、ページを個別"
 "にセレクトできます。"
 
-#: ../my-upload-images.php:77
-msgid "Metabox title"
-msgstr "メタボックスのタイトル"
-
-#: ../my-upload-images.php:81
-msgid "Select post types"
-msgstr "投稿タイプを選択"
-
-#: ../my-upload-images.php:86
+#: ../my-upload-images.php:90
 msgid "Featured images"
 msgstr "アイキャッチ画像"
 
-#: ../my-upload-images.php:88
+#: ../my-upload-images.php:92
 msgid "Generate thumbnail from the first of my upload images"
 msgstr "マイアップロード画像の先頭から自動でサムネイルを作成する"
 
-#: ../my-upload-images.php:88
+#: ../my-upload-images.php:92
 msgid "No automatically generating"
 msgstr "自動で作成しない"
 
-#: ../my-upload-images.php:92
+#: ../my-upload-images.php:96
+msgid "Put the metabox"
+msgstr "メタボックスの表示位置"
+
+#: ../my-upload-images.php:96
+msgid ""
+"If conflict with a plugin of custom fields, set value to \"on the side\"."
+msgstr ""
+"カスタムフィールド関連プラグインとコンフリクトする場合「サイドに設置」を指"
+"定してください。"
+
+#: ../my-upload-images.php:98
+msgid "on the side"
+msgstr "サイドに設置"
+
+#: ../my-upload-images.php:98
+msgid "after the editor"
+msgstr "エディターの下に設置"
+
+#: ../my-upload-images.php:98
+msgid "after the title"
+msgstr "タイトルの下に設置"
+
+#: ../my-upload-images.php:102
 msgid "When the plugin is uninstalled"
 msgstr "アンインストール時の設定"
 
-#: ../my-upload-images.php:94
+#: ../my-upload-images.php:104
 msgid "Keep the options and customfields"
 msgstr "オプション設定とカスタムフィールドをキープする"
 
-#: ../my-upload-images.php:94
+#: ../my-upload-images.php:104
 msgid "Delete the options and customfields"
 msgstr "オプション設定とカスタムフィールドを削除する"
 
-#: ../my-upload-images.php:98
+#: ../my-upload-images.php:108
 msgid "Save changes"
 msgstr "変更を保存"
 
-#: ../my-upload-images.php:138 ../my-upload-images.php:237
+#: ../my-upload-images.php:153 ../my-upload-images.php:255
 msgid "Remove this image from the list"
 msgstr "この画像をリストから削除"
 
-#: ../my-upload-images.php:170
+#: ../my-upload-images.php:185
 msgid "Add and edit images"
 msgstr "画像の追加・編集"
 
-#: ../my-upload-images.php:187
+#: ../my-upload-images.php:202
 msgid "Upload images"
 msgstr "画像のアップロード"
 

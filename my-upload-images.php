@@ -6,7 +6,7 @@ Plugin URI: http://web.contempo.jp/weblog/tips/p617
 Description: Create metabox with media uploader. It allows to upload and sort images in any post_type. 
 Author: Mizuho Ogino
 Author URI: http://web.contempo.jp/
-Version: 1.3.2
+Version: 1.3.3
 Text Domain: mui
 Domain Path: /languages
 License: http://www.gnu.org/licenses/gpl.html GPL v2 or later
@@ -30,6 +30,7 @@ function mui_options() {
         update_option('mui_keepvalues', $_POST['mui_keepvalues']);
         update_option('mui_postthumb', $_POST['mui_postthumb']);
         update_option('mui_title', strip_tags( $_POST['mui_title']));
+        update_option('mui_position', $_POST['mui_position']);
         echo '<div class="updated fade"><p><strong>'. __('Options saved.', 'mui'). '</strong></p></div>';
     } 
 	$default = $keepvalues = $postthumb = array();
@@ -47,6 +48,9 @@ function mui_options() {
 	$opt = get_option('mui_postthumb');
 	if ( empty( $opt ) ) $opt = 'defalt';
 	$postthumb[ $opt ] = ' selected';
+	$opt = get_option('mui_position');
+	if ( empty( $opt ) ) $opt = 'side';
+	$position[ $opt ] = ' selected';
 	$post_types = get_post_types( array( 'public' => true ), 'objects' ); 
 	unset($post_types['attachment']); 
 	$inputs = $individuals = '';
@@ -54,7 +58,7 @@ function mui_options() {
 		if ( isset($default[ $post_type->name ]) ) $checked = ' checked="checked"'; else $checked = ''; 
 		$inputs .= "\t\t\t".'<p><label for="field-mui_posttype-'.$post_type->name.'"><input id="field-mui_posttype-'.$post_type->name.'" type="checkbox" name="mui_posttype[]" value="'.$post_type->name.'"'.$checked.'/>'.$post_type->label.'</label></p>'."\n";
 		if ( $post_type->capability_type == 'page' ) {
-			$pages = get_posts( '&post_type=' .$post_type->name. '&orderby=menu_order&order=ASC' );
+			$pages = get_posts( '&post_type=' .$post_type->name. '&post_status=any&numberposts=-1' );
 			if ($pages) : 
 				$individuals .= "\t".'<tr id="individuals-'.$post_type->name.'">'."\n\t\t".'<th scope="row">'.sprintf(__('Select %s', 'mui'), $post_type->label).'</th>'."\n\t\t".'<td>'."\n";
 				$individuals .= "\t\t".'<script type="text/javascript">jQuery( function($){ var ckbtn = $("input#field-mui_posttype-'.$post_type->name.'"), cktaget = $("tr#individuals-'.$post_type->name.'").hide(); if ( ckbtn.is(":checked") ) cktaget.show(); ckbtn.click( function () { if ( ckbtn.is(":checked") ) cktaget.show(); else cktaget.hide(); }); });</script>'."\n";
@@ -70,7 +74,6 @@ function mui_options() {
 		'<div class="wrap">'."\n".
 		'<h2>' .__( 'My Upload Images Settings', 'mui' ).'</h2>'."\n".
 		'<h3>' .__( 'Select post_types to display the metabox.', 'mui' ). '</h3>'."\n".
-		'<p>' .__( 'If the post_type has "capability_type" parameter as "page", pages will be individually selectable.', 'mui' ). '</p>'."\n".
 		'<form action="" method="post">'."\n".
 		'<table class="form-table">'."\n".
 		"\t".'<tr>'."\n".
@@ -78,7 +81,8 @@ function mui_options() {
 		"\t\t".'<td>'."\n\t\t\t".'<input type="text" name="mui_title" class="text" size="40" value="'.esc_attr( get_option('mui_title') ).'" />'."\n\t\t".'</td>'."\n".
 		"\t".'</tr>'."\n".
 		"\t".'<tr>'."\n".
-		"\t\t".'<th scope="row">'.__( 'Select post types', 'mui' ).'</th>'."\n".
+		"\t\t".'<th scope="row">'.__( 'Select post types', 'mui' ).
+		'<p style="font-size:.8em;font-weight:normal;">' .__( 'If the post_type has "capability_type" parameter as "page", pages will be individually selectable.', 'mui' ). '</p></th>'."\n".
 		"\t\t".'<td>'."\n". $inputs. "\t\t".'</td>'."\n".
 		"\t".'</tr>'."\n".
 		$individuals. 
@@ -86,6 +90,13 @@ function mui_options() {
 		"\t\t".'<th scope="row">'.__( 'Featured images', 'mui' ).'</th>'."\n".
 		"\t\t".'<td>'."\n".
 		"\t\t\t". '<select name="mui_postthumb"><option value="generate"'.$postthumb[ 'generate' ].'>'.__( 'Generate thumbnail from the first of my upload images', 'mui' ).'</option><option value="defalt"'.$postthumb[ 'defalt' ].'>'.__( 'No automatically generating', 'mui' ).'</option></select>'."\n".
+		"\t\t".'</td>'."\n".
+		"\t".'</tr>'."\n".
+		"\t".'<tr>'."\n".
+		"\t\t".'<th scope="row">'.__( 'Put the metabox', 'mui' ).
+		'<p style="font-size:.8em;font-weight:normal;">' .__( 'If conflict with a plugin of custom fields, set value to "on the side".', 'mui' ). '</p></th>'."\n".
+		"\t\t".'<td>'."\n".
+		"\t\t\t". '<select name="mui_position"><option value="side"'.$position[ 'side' ].'>'.__( 'on the side', 'mui' ).'</option><option value="advanced"'.$position[ 'advanced' ].'>'.__( 'after the editor', 'mui' ).'</option><option value="mui_after_title"'.$position[ 'mui_after_title' ].'>'.__( 'after the title', 'mui' ).'</option></select>'."\n".
 		"\t\t".'</td>'."\n".
 		"\t".'</tr>'."\n".
 		"\t".'<tr>'."\n".
@@ -101,25 +112,28 @@ function mui_options() {
 		'</div>'."\n";
 }
 
-add_action( 'admin_menu', 'mui_metaboxes_init' );
+add_action( 'admin_menu', 'mui_metaboxes_init', 100 );
 function mui_metaboxes_init(){ 
 	$opt = get_option('mui_posttype');
-	$opt_title = get_option('mui_title');
-	if ( !$opt_title ) $opt_title = __( 'My Upload Images', 'mui' );
-	if ($opt): 
-		foreach( $opt as $key => $val ):
-			if ( get_post_type_object( $val )->capability_type == 'page' ){
-				if ( isset($_GET['post']) || isset($_POST['post_ID']) ) $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
-				$opt_p = get_option('mui_pages');
-				if ($opt_p): foreach( $opt_p as $key_p => $val_p ):	
-					if ($post_id == $val_p) add_meta_box( 'mui_images', $opt_title, 'set_mui_uploader', $val, 'side','high' );
-				endforeach; endif;
-			} else {
-				add_meta_box( 'mui_images', $opt_title, 'set_mui_uploader', $val, 'side','high' );
-			}
-		endforeach; 
-		add_action( 'save_post', 'save_mui_images' );
-	endif;
+	if ( empty($opt) ) return; 
+	if ( !$opt_title = get_option('mui_title') ) $opt_title = __( 'My Upload Images', 'mui' );
+	if ( !$opt_position = get_option('mui_position') ) $opt_position = 'side';
+	
+	foreach( $opt as $key => $val ):
+		if ( get_post_type_object( $val )->capability_type == 'page' ){
+			if ( isset($_GET['post']) || isset($_POST['post_ID']) ) $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+			$opt_p = get_option('mui_pages');
+			if ($opt_p): foreach( $opt_p as $key_p => $val_p ):	
+				if ($post_id == $val_p) add_meta_box( 'mui_images', $opt_title, 'set_mui_uploader', $val, $opt_position, 'high' );
+			endforeach; endif;
+		} else {
+			add_meta_box( 'mui_images', $opt_title, 'set_mui_uploader', $val, $opt_position, 'high' );
+		}
+	endforeach; 
+	add_action( 'save_post', 'save_mui_images' );
+	add_action( 'edit_form_after_title', function(){
+		if( get_option('mui_position') === 'mui_after_title' ) do_meta_boxes( $val, 'mui_after_title', $post_id );
+	});
 }
 
 function set_mui_uploader(){ 
@@ -192,12 +206,15 @@ jQuery( function( $ ){
 			multiple: custom_uploader.options.multiple ? 'reset' : false
 		})
 	]);
+	// $( '#mui_images' ).addClass( 'wp-editor-wrap' ).on('drop', function( e ) { 
+	// 	$(this).removeClass( 'wp-editor-wrap' );
+	// 	custom_uploader.open();
+	// });
 	$( '#mui_media' ).on('click', function( e ) {
-		e.preventDefault();
-		e.stopPropagation();
 		var clickagain = function() { if ( !$( '.media-frame' ).length ) { custom_uploader.open(); } }
 		setTimeout( clickagain, 100); // The parameter "menu:false" disturbs open() event.	
 		custom_uploader.open();
+		return false;
 	});
 	var ex_ul = $( '#mui_list' ), ex_ids = [];
 	custom_uploader.on( 'ready', function( ){
@@ -280,13 +297,3 @@ function save_mui_images( $post_id ){
 	}
 }
 
-
-// add_filter( 'post_thumbnail_html', 'mui_thumbnail_html', 20, 5 );
-// function mui_thumbnail_html( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
-// // USING MY UPLOAD IMAGES AS POST THUMBNAIL
-// 	if ( $image = get_post_meta( $post_id, 'my_upload_images', true ) ){
-// 		$image = wp_get_attachment_image_src ( $image[0], $size );
-// 		$html = '<img src="'.$image[0].'" width="'.$image[1].'" height="'.$image[2].'"/>';
-// 	}
-// 	return $html;
-// }
